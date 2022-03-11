@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="./vue.js"></script>
-  <title>Vue.js</title>
-</head>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
   <div id="app">
-    <p>Banana {{estoqueBanana}}</p>
-    <button v-show="estoqueBanana" @click="adicionarItem">+</button>
-    <button v-show="carrinho" @click="removerItem">-</button>
+    <p>Bananas: {{estoqueBananas}}</p>
+    <button v-show="estoqueBananas" @click="addItem">+</button>
+    <button v-show="carrinho" @click="removeItem">-</button>
     <p>Carrinho: {{carrinho}}</p>
-    <p v-show="estoqueBanana === 0">Não temos mais Bananas em estoque.</p>
+    <p v-show="estoqueBananas === 0">Não temos mais bananas no estoque</p>
   </div>
-  <script>
-    const vm = new Vue({
-      el: "#app",
-      data: {
-        estoqueBanana: 7,
-        carrinho: 0,
-      },
-      methods: {
-        adicionarItem() {
-          this.carrinho++;
-          this.estoqueBanana--;
-        },
-        removerItem() {
-          this.carrinho--;
-          this.estoqueBanana++;
-        }
-      }
-    })
-  </script>
 
-  <!--
+  <body>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          estoqueBananas: 7,
+          carrinho: 0,
+        },
+        methods: {
+          addItem() {
+            this.carrinho++;
+            this.estoqueBananas--;
+          },
+          removeItem() {
+            this.carrinho--;
+            this.estoqueBananas++;
+          },
+        },
+      });
+    </script>
+
+    <!--
   Simule a adição de um produto no carrinho
   este produto possui estoque de 7 itens
   (utilize a mesma ideia do contador).
@@ -47,6 +46,5 @@
 
   Remova também o botão de adicionar itens.
 -->
-
-</body>
+  </body>
 </html>

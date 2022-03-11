@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="./vue.js"></script>
-  <title>Vue.js</title>
-</head>
-
-<body>
-  <div id="app">
-
-    <p>latestTime: {{acoes.latestTime}}</p>
-    <p>latestPrice: {{acoes.latestPrice}}</p>
-    <p>companyName: {{acoes.companyName}}</p>
-    <button @click="puxarAcoes">Puxar Ações</button>
-  </div>
-  <!--
+  <body>
+    <div id="app">
+      <p>latestTime: {{acoes.latestTime}}</p>
+      <p>latestPrice: {{acoes.latestPrice}}</p>
+      <p>companyName: {{acoes.companyName}}</p>
+      <button @click="puxarAcoes">Puxar Ações</button>
+    </div>
+    <!--
   Utilizando a API
   https://cloud.iexapis.com/stable/stock/aapl/quote?token=TOKENAQUI
   Não se esqueça de se cadastrar em: https://iexcloud.io/ para gerar o seu token:
@@ -29,23 +27,22 @@
   mostre o valor de latestPrice, latestTime e o
   companyName na interface.
 -->
-  <script>
-    const vm = new Vue({
-      el: "#app",
-      data: {
-        acoes: {},
-      },
-      methods: {
-        puxarAcoes() {
-          fetch("https://cloud.iexapis.com/stable/stock/aapl/quote?token=TOKENAQUI")
-            .then(response => response.json())
-            .then(json => {
-              this.acoes = json;
-            })
-        }
-      }
-    })
-  </script>
-</body>
-
+    <script>
+      const vm = new vue({
+        el: "#app",
+        data: {
+          acoes: {},
+        },
+        methods: {
+          puxarAcoes() {
+            fetch("https://api.iextrading.com/1.0/stock/aapl/quote")
+              .then((response) => response.json())
+              .then((json) => {
+                this.acoes = json;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
 </html>
