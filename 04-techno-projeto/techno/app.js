@@ -4,6 +4,7 @@ const vm = new Vue({
     produtos: [],
     produto: false,
     carrinho: [],
+    carrinhoAtivo: true,
     mensagemAlerta: "Item adicionado",
     alertaAtivo: false,
   },
@@ -53,6 +54,11 @@ const vm = new Vue({
         this.produto = false;
       }
     },
+    clickForaCarrinho({ target, currentTarget }) {
+      if (target === currentTarget) {
+        this.carrinhoAtivo = false;
+      }
+    },
     adicionarItem() {
       this.produto.estoque++;
       const { id, nome, preco } = this.produto;
@@ -66,6 +72,10 @@ const vm = new Vue({
       if (window.localStorage.carrinho) {
         this.carrinho = JSON.parse(window.localStorage.carrinho);
       }
+    },
+    compararEstoque() {
+      const items = this.carrinho.filter(({ id }) => id === this.produto.id);
+      this.produto.estoque -= items.length;
     },
     alerta(mensagem) {
       this.mensagem = mensagem;
@@ -83,6 +93,9 @@ const vm = new Vue({
         document.title = this.produto.nome || "Techno";
         const hash = this.produto.id || "";
         history.pushState(null, null, `#${hash}`);
+        if (this.produto) {
+          this.compararEstoque();
+        }
       },
       carrinho() {
         window.localStorage.carrinho = JSON.stringify(this.carrinho);
