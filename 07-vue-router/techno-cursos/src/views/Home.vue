@@ -1,31 +1,23 @@
 <template>
   <div>
-    <h1>Home</h1>
+    <div v-if="loading">
+      <PageLoading/>
+    </div>
+    <div v-if="api">
+      <h1>Home</h1>
+      <p>{{ api }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import api from "../services/axios";
+import fetchData from "../mixins/fetchData.js";
+
 export default {
   name: "home",
-  data() {
-    return {
-      api: null,
-    };
-  },
-  methods: {
-    fetchData() {
-      axios
-        .get(api)
-        .then((r) => r.json)
-        .then((r) => {
-          this.api = r;
-        });
-    },
-  },
+  mixins: [fetchData],
   created() {
-    this.fetchData();
+    this.fetchData("/home");
   },
 };
 </script>
