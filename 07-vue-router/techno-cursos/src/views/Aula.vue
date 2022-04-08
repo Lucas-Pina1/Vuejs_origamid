@@ -5,7 +5,6 @@
     </div>
     <transition>
       <div v-if="api">
-        >
         <h2>{{ api.nome }}</h2>
         <div class="video">
           <iframe
